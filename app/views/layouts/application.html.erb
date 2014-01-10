@@ -1,14 +1,36 @@
 <!DOCTYPE html>
+
 <html>
+
 <head>
-  <title>JKino</title>
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
-  <%= csrf_meta_tags %>
+	<title>JärvenKino</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+ 	<%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+	<%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+	<%= csrf_meta_tags %>
 </head>
+
 <body>
-
-<%= yield %>
-
+	<div class="container">	
+		<div class="header">
+			<ul class="nav nav-pills pull-right">
+ 				<li class="<%= 'active' if params[:controller] == 'events' %>">
+					<%= link_to 'Esitykset', events_path %>
+				</li>
+				
+				<li class="<%= 'active' if params[:controller] == 'movies' %>">
+					<%= link_to 'Elokuvat', movies_path %>
+				</li>
+				
+				<li>
+					<a href="#">Login</a>
+				</li>
+			</ul>
+			<h1 class="text-muted">Järvenkino</h1>
+		</div>
+		
+		<%= yield %>
+	</div>
 </body>
+
 </html>

@@ -1,0 +1,34 @@
+<table class="table table-striped table-hover">
+	<thead>
+		<tr>
+			<th><i class="glyphicon glyphicon-calendar"></i> Päivämäärä</th>
+			<th><i class="glyphicon glyphicon-info-sign"></i> Esityksen nimi</th>
+			<th><i class="glyphicon glyphicon-film"></i> Elokuvat</th>
+			<th><i class="glyphicon glyphicon-user"></i> Osallistujamäärä</th>
+			<th></th>
+			<th></th>
+		</tr>
+	</thead>
+
+	<tbody>
+		<% @events.each do |event| %>
+			<tr>
+				<td><%= event.event_date %></td>
+				<td><%= event.event_name %></td>
+				<td></td>
+				<td></td>
+				<td><%= link_to 'Muokkaa', edit_event_path(event), :class => "btn btn-default" %></td>
+				<td><%= link_to 'Poista', event, method: :delete, data: { confirm: 'Oletko varma?' }, :class => "btn btn-default" %></td>
+			</tr>
+		<% end %>
+		
+		<tr>
+			<td colspan="6">
+				<%= link_to 'Luo uusi tapahtuma', new_event_path, :class => "btn btn-default" %>
+			</td>
+		</tr>
+	</tbody>
+</table>
+	
+<br>
+

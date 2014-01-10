@@ -1,0 +1,38 @@
+	<script>
+		$(function(){
+			$('.datepicker').datepicker();
+		});
+	</script>
+	
+<%= form_for(@event) do |f| %>
+	<% if @event.errors.any? %>
+		<div id="error_explanation">
+			<h2>
+				Tallentaminen epäonnistui:
+			</h2>
+
+			<ul>
+				<% @event.errors.full_messages.each do |msg| %>
+					<li>
+						<%= msg %>
+					</li>
+				<% end %>
+			</ul>
+		</div>
+	<% end %>
+
+	<div class="field input-group input-group-lg">
+		<span class="input-group-addon"><i class="glyphicon glyphicon-film"></i></span>
+		<%= f.text_field :event_name, :class => "form-control", :placeholder => "Esityksen nimi" %>
+	</div>
+	
+		<div class="input-append date" id="dp3" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
+			<input class="span2" size="16" type="text" value="12-02-2012" readonly>
+			<span class="add-on"><i class="icon-calendar"></i></span>
+		</div>
+	
+	<div class="actions">
+		<%= f.submit "Lisää esitys", :class => "btn btn-default" %>
+		<%= link_to 'Takaisin esityksiin', movies_path, :class => "btn btn-default" %>
+	</div>	
+<% end %>

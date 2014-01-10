@@ -1,0 +1,38 @@
+<table class="table table-striped table-hover">
+	<thead>
+		<tr>
+			<th><i class="glyphicon glyphicon-film"></i> Elokuva</th>
+			<th><i class="glyphicon glyphicon-globe"></i> Linkki</th>
+			<th></th>
+			<th></th>
+		</tr>
+	</thead>
+
+	<tbody>
+		<% @movies.each do |movie| %>
+			<tr>
+				<td>
+					<%= movie.movie_name %>
+				</td>
+				
+				<td>
+					<a href="<%= movie.movie_url %>" target="_blank"><%= movie.movie_url %></>
+				</td>
+				
+				<td>
+					<%= link_to 'Muokkaa', edit_movie_path(movie), :class => "btn btn-default" %>
+				</td>
+				
+				<td>
+					<%= link_to 'Poista', movie, method: :delete, data: { confirm: 'Oletko varma?' }, :class => "btn btn-default" %>
+				</td>
+			</tr>
+		<% end %>
+
+		<tr>
+			<td colspan="5">
+				<%= link_to 'Lisää uusi elokuva', new_movie_path, :class => "btn btn-default" %>
+			</td>
+		</tr>
+	</tbody>
+</table>

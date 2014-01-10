@@ -1,0 +1,32 @@
+<%= form_for(@movie) do |f| %>
+	<% if @movie.errors.any? %>
+		<div id="error_explanation">
+			<h2>
+				Tallentaminen epäonnistui:
+			</h2>
+			
+			<ul>
+				<% @movie.errors.full_messages.each do |msg| %>
+					<li>
+						<%= msg %>
+					</li>
+				<% end %>
+			</ul>
+		</div>
+	<% end %>
+
+	<div class="field input-group input-group-lg">
+		<span class="input-group-addon"><i class="glyphicon glyphicon-film"></i></span>
+		<%= f.text_field :movie_name, :class => "form-control", :placeholder => "Elokuvan nimi" %>
+	</div>
+	
+	<div class="field input-group input-group-lg">
+		<span class="input-group-addon"><i class="glyphicon glyphicon-globe"></i></span>
+		<%= f.text_field :movie_url, :class => "form-control", :placeholder => "Linkki" %>
+	</div>
+  
+	<div class="actions">
+		<%= f.submit "Lisää elokuva", :class => "btn btn-default" %>
+		<%= link_to 'Takaisin elokuviin', movies_path, :class => "btn btn-default" %>
+	</div>
+<% end %>
