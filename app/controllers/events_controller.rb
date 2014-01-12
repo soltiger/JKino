@@ -6,7 +6,7 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    @events = Event.all.asc
+    @events = Event.all.sort_by { |obj| obj.event_date }
   end
   
   # GET /movies/1

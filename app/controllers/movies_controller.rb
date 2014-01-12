@@ -6,7 +6,7 @@ class MoviesController < ApplicationController
   # GET /movies
   # GET /movies.json
   def index
-    @movies = Movie.all.asc
+    @movies = Movie.all.sort_by { |obj| obj.movie_name }
   end
 
   # GET /movies/1
