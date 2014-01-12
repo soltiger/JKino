@@ -13,12 +13,34 @@
 	<tbody>
 		<% @events.each do |event| %>
 			<tr>
-				<td><%= event.event_date %></td>
-				<td><%= event.event_name %></td>
-				<td></td>
-				<td></td>
-				<td><%= link_to 'Muokkaa', edit_event_path(event), :class => "btn btn-default" %></td>
-				<td><%= link_to 'Poista', event, method: :delete, data: { confirm: 'Oletko varma?' }, :class => "btn btn-default" %></td>
+				<td>
+					<%= event.event_date %>
+				</td>
+				
+				<td>
+					<%= event.event_name %>
+				</td>
+				
+				<td>
+					<% event.movies.each do |movie| %>
+						<%= movie.movie_name %>
+						<% unless movie.movie_url.strip.empty? %>
+							[<a href="<%= movie.movie_url %>" target="_blank">www</a>]<br>
+						<% end %>
+					<% end %>
+				</td>
+				
+				<td>
+					<%= event.participantCount %>
+				</td>
+				
+				<td>
+					<%= link_to 'Muokkaa', edit_event_path(event), :class => "btn btn-default" %>
+				</td>
+				
+				<td>
+					<%= link_to 'Poista', event, method: :delete, data: { confirm: 'Oletko varma?' }, :class => "btn btn-default" %>
+				</td>
 			</tr>
 		<% end %>
 		

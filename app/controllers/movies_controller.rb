@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class MoviesController < ApplicationController
   before_action :set_movie, only: [:show, :edit, :update, :destroy]
 
@@ -28,7 +30,7 @@ class MoviesController < ApplicationController
 
     respond_to do |format|
       if @movie.save
-        format.html { redirect_to @movie, notice: 'Movie was successfully created.' }
+        format.html { redirect_to movies_url, notice: 'Elokuva lisätty' }
         format.json { render action: 'show', status: :created, location: @movie }
       else
         format.html { render action: 'new' }
@@ -42,7 +44,7 @@ class MoviesController < ApplicationController
   def update
     respond_to do |format|
       if @movie.update(movie_params)
-        format.html { redirect_to @movie, notice: 'Movie was successfully updated.' }
+        format.html { redirect_to movies_url, notice: 'Elokuva päivitetty' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -56,7 +58,7 @@ class MoviesController < ApplicationController
   def destroy
     @movie.destroy
     respond_to do |format|
-      format.html { redirect_to movies_url }
+      format.html { redirect_to movies_url, notice: 'Elokuva poistettu' }
       format.json { head :no_content }
     end
   end

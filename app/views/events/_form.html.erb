@@ -32,17 +32,43 @@
 	</div>
 
 	<div class="field input-group input-group-lg">
-		<span class="input-group-addon"><i class="glyphicon glyphicon-film"></i></span>
-		<input type="text" class="form-control" placeholder ="Elokuvat">
-	</div>
-
-	<div class="field input-group input-group-lg">
 		<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-		<input type="text" class="form-control" placeholder ="Osallistujamäärä">
+		<%= f.text_field :participantCount, :class => "form-control", :placeholder => "Osallistujamäärä" %>
 	</div>
 	
+	<div class="field input-group input-group-lg">
+		<h3>Valitse elokuvat:</h3>
+	</div>
+	
+	<div>
+		<% Movie.all.each_with_index do |movie, index| %>
+			<% if index % 3 == 0 %>
+				<div class="row">
+			<% end %>
+
+			<div class="col-lg-4">
+				<div class="input-group">
+					<span class="input-group-addon">
+						<% if @event.movies.include? movie %>
+							<%= check_box_tag 'movie_ids[]', movie.id, :checked => true %>
+						<% else %>
+							<%= check_box_tag 'movie_ids[]', movie.id %>
+						<% end %>
+					</span>
+					<input type="text" class="form-control" value="<%= movie.movie_name %>" disabled>
+				</div>
+			</div>
+
+			<% if index % 3 == 2 || index == Movie.all.length-1 %>
+				</div>
+			<% end %>
+		<% end %>
+	</div>
+	
+	<br>
+
 	<div class="actions">
-		<%= f.submit "Lisää esitys", :class => "btn btn-default" %>
+		<%= f.submit "Talleta esitys", :class => "btn btn-default" %>
 		<%= link_to 'Takaisin esityksiin', events_path, :class => "btn btn-default" %>
 	</div>	
 <% end %>

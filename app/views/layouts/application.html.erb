@@ -13,7 +13,8 @@
 <body>
 	<div class="container">	
 		<div class="header">
-			<ul class="nav nav-pills pull-right">
+			<h1 class="text-muted">Järvenkino</h1>
+			<ul class="nav nav-tabs ">
  				<li class="<%= 'active' if params[:controller] == 'events' %>">
 					<%= link_to 'Esitykset', events_path %>
 				</li>
@@ -26,9 +27,9 @@
 					<a href="#">Login</a>
 				</li>
 			</ul>
-			<h1 class="text-muted">Järvenkino</h1>
 		</div>
 		
+		<p id="notice"><%= notice %></p>
 		<%= yield %>
 	</div>
 </body>
