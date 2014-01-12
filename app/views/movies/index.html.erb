@@ -20,11 +20,15 @@
 				</td>
 				
 				<td>
-					<%= link_to 'Muokkaa', edit_movie_path(movie), :class => "btn btn-default" %>
+					<% if admin_rights %>
+						<%= link_to 'Muokkaa', edit_movie_path(movie), :class => "btn btn-default" %>
+					<% end %>
 				</td>
 				
 				<td>
-					<%= link_to 'Poista', movie, method: :delete, data: { confirm: 'Oletko varma?' }, :class => "btn btn-default" %>
+					<% if admin_rights %>
+						<%= link_to 'Poista', movie, method: :delete, data: { confirm: 'Oletko varma?' }, :class => "btn btn-default" %>
+					<% end %>
 				</td>
 			</tr>
 		<% end %>

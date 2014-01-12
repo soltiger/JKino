@@ -42,25 +42,29 @@ class MoviesController < ApplicationController
   # PATCH/PUT /movies/1
   # PATCH/PUT /movies/1.json
   def update
-    respond_to do |format|
-      if @movie.update(movie_params)
-        format.html { redirect_to movies_url, notice: 'Elokuva päivitetty' }
-        format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
-        format.json { render json: @movie.errors, status: :unprocessable_entity }
-      end
+	if admin_rights
+		respond_to do |format|
+		  if @movie.update(movie_params)
+			format.html { redirect_to movies_url, notice: 'Elokuva päivitetty' }
+			format.json { head :no_content }
+		  else
+			format.html { render action: 'edit' }
+			format.json { render json: @movie.errors, status: :unprocessable_entity }
+		  end
+		end
     end
   end
 
   # DELETE /movies/1
   # DELETE /movies/1.json
   def destroy
-    @movie.destroy
-    respond_to do |format|
-      format.html { redirect_to movies_url, notice: 'Elokuva poistettu' }
-      format.json { head :no_content }
-    end
+	if admin_rights
+		@movie.destroy
+		respond_to do |format|
+		  format.html { redirect_to movies_url, notice: 'Elokuva poistettu' }
+		  format.json { head :no_content }
+		end
+	end
   end
 
   private

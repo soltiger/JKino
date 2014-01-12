@@ -35,20 +35,26 @@
 				</td>
 				
 				<td>
-					<%= link_to 'Muokkaa', edit_event_path(event), :class => "btn btn-default" %>
+					<% if admin_rights %>
+						<%= link_to 'Muokkaa', edit_event_path(event), :class => "btn btn-default" %>
+					<% end %>
 				</td>
 				
 				<td>
-					<%= link_to 'Poista', event, method: :delete, data: { confirm: 'Oletko varma?' }, :class => "btn btn-default" %>
+					<% if admin_rights %>
+						<%= link_to 'Poista', event, method: :delete, data: { confirm: 'Oletko varma?' }, :class => "btn btn-default" %>
+					<% end %>
 				</td>
 			</tr>
 		<% end %>
 		
-		<tr>
-			<td colspan="6">
-				<%= link_to 'Luo uusi tapahtuma', new_event_path, :class => "btn btn-default" %>
-			</td>
-		</tr>
+		<% if admin_rights %>
+			<tr>
+				<td colspan="6">
+					<%= link_to 'Luo uusi tapahtuma', new_event_path, :class => "btn btn-default" %>
+				</td>
+			</tr>
+		<% end %>
 	</tbody>
 </table>
 	

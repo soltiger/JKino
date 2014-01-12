@@ -22,10 +22,21 @@
 				<li class="<%= 'active' if params[:controller] == 'movies' %>">
 					<%= link_to 'Elokuvat', movies_path %>
 				</li>
-				
-				<li>
-					<a href="#">Login</a>
+
+				<li class="<%= 'active' if params[:controller] == 'users' %>">
+					<%= link_to "Luo tunnus", sign_up_path %>
 				</li>
+
+				<% if current_user %>
+					<li class="<%= 'active' if params[:controller] == 'sessions' %>">
+						<%= link_to "Kirjaudu ulos", log_out_path %>
+					</li>
+				<% else %>
+					<li class="<%= 'active' if params[:controller] == 'sessions' %>">
+						<%= link_to "Kirjaudu", log_in_path %>
+					</li>
+				<% end %>
+				
 			</ul>
 		</div>
 		

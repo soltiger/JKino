@@ -1,3 +1,5 @@
-<h1>Muokkaa elokuvaa</h1>
+<% if admin_rights %>
+	<h1>Muokkaa elokuvaa</h1>
 
-<%= render 'form' %>
+	<%= render 'form' %>
+<% end %>

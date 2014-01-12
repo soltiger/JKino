@@ -16,7 +16,9 @@ class EventsController < ApplicationController
 
   # GET /events/new
   def new
-    @event = Event.new
+	if admin_rights
+		@event = Event.new
+	end
   end
 
   # GET /events/1/edit
@@ -26,54 +28,64 @@ class EventsController < ApplicationController
   # POST /events
   # POST /events.json
   def create
-    @event = Event.new(event_params)
-	
-	# Associate movies with the event
-	Movie.all.find(params[:movie_ids]).each do |movie|
-		@event.movies << movie
+	if admin_rights
+		@event = Event.new(event_params)
+		
+		# Associate movies with the event
+		if params[:movie_ids]
+			Movie.all.find(params[:movie_ids]).each do |movie|
+				@event.movies << movie
+			end
+		end
+		
+		respond_to do |format|
+		  if @event.save
+			format.html { redirect_to events_url, notice: 'Esitys luotu' }
+			format.json { render action: 'show', status: :created, location: @event }
+		  else
+			format.html { render action: 'new' }
+			format.json { render json: @event.errors, status: :unprocessable_entity }
+		  end
+		end
 	end
-	
-    respond_to do |format|
-      if @event.save
-        format.html { redirect_to events_url, notice: 'Esitys luotu' }
-        format.json { render action: 'show', status: :created, location: @event }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @event.errors, status: :unprocessable_entity }
-      end
-    end
   end
 
   # PATCH/PUT /events/1
   # PATCH/PUT /events/1.json
   def update
-	# Clear old movies of the event
-	@event.movies.clear
-  
-	# Associate movies with the event
-	Movie.all.find(params[:movie_ids]).each do |movie|
-		@event.movies << movie
-	end
+	if admin_rights
+		# Clear old movies of the event
+		@event.movies.clear
+	  
+		# Associate movies with the event
+		if params[:movie_ids]
+			Movie.all.find(params[:movie_ids]).each do |movie|
+				@event.movies << movie
+			end
+		end
 
-	respond_to do |format|
-      if @event.update(event_params)
-        format.html { redirect_to events_url, notice: 'Esitys päivitetty' }
-        format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
-        format.json { render json: @event.errors, status: :unprocessable_entity }
-      end
-    end
+		respond_to do |format|
+		  if @event.update(event_params)
+			format.html { redirect_to events_url, notice: 'Esitys päivitetty' }
+			format.json { head :no_content }
+		  else
+			format.html { render action: 'edit' }
+			format.json { render json: @event.errors, status: :unprocessable_entity }
+		  end
+		end
+	end
   end
 
   # DELETE /events/1
   # DELETE /events/1.json
   def destroy
-    @event.destroy
-    respond_to do |format|
-      format.html { redirect_to events_url, notice: 'Esitys poistettu' }
-      format.json { head :no_content }
-    end
+	if admin_rights
+		@event.destroy
+		respond_to do |format|
+		  format.html { redirect_to events_url, notice: 'Esitys poistettu' }
+		  format.json { head :no_content }
+		end
+	end
   end
 
   private

@@ -1,3 +1,5 @@
-<h1>Muokkaa esitystä</h1>
+<% if admin_rights %>
+	<h1>Muokkaa esitystä</h1>
 
-<%= render 'form' %>
+	<%= render 'form' %>
+<% end %>
