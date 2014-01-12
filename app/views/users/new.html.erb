@@ -1,0 +1,47 @@
+<h1>
+	Luo käyttäjä
+</h1>
+
+<%= form_for @user do |f| %>
+	<% if @user.errors.any? %>
+		<div class="error_messages">
+			<h2>
+				Käyttäjän luominen ei onnistunut
+			</h2>
+			
+			<ul>
+				<% for message in @user.errors.full_messages %>
+					<li>
+						<%= message %>
+					</li>
+				<% end %>
+			</ul>
+		</div>
+	<% end %>
+	
+	<div class="field input-group input-group-lg">
+		<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+		<%= f.text_field :username, :class => "form-control", :placeholder => "Käyttäjänimi" %>
+	</div>
+
+	<div class="field input-group input-group-lg">
+		<span class="input-group-addon">@</span>
+		<%= f.text_field :email, :class => "form-control", :placeholder => "Sähköposti *" %>
+	</div>
+
+	<div class="field input-group input-group-lg">
+		<span class="input-group-addon"><i class="glyphicon glyphicon-eye-close"></i></span>
+		<%= f.password_field :password, :class => "form-control", :placeholder => "Salasana" %>
+	</div>
+
+	<div class="field input-group input-group-lg">
+		<span class="input-group-addon"><i class="glyphicon glyphicon-eye-close"></i></span>
+		<%= f.password_field :password_confirmation, :class => "form-control", :placeholder => "Salasana uudelleen" %>
+	</div>
+	
+	<p class="button">
+		<%= f.submit "Luo käyttäjä", :class => "btn btn-default" %>
+	</p>
+	
+	(* = Sähköposti ei ole vaadittu)
+<% end %>
