@@ -26,17 +26,19 @@ class MoviesController < ApplicationController
   # POST /movies
   # POST /movies.json
   def create
-    @movie = Movie.new(movie_params)
+		if admin_rights
+	    @movie = Movie.new(movie_params)
 
-    respond_to do |format|
-      if @movie.save
-        format.html { redirect_to movies_url, notice: 'Elokuva lisätty' }
-        format.json { render action: 'show', status: :created, location: @movie }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @movie.errors, status: :unprocessable_entity }
-      end
-    end
+	    respond_to do |format|
+	      if @movie.save
+	        format.html { redirect_to movies_url, notice: 'Elokuva lisätty' }
+	        format.json { render action: 'show', status: :created, location: @movie }
+	      else
+	        format.html { render action: 'new' }
+	        format.json { render json: @movie.errors, status: :unprocessable_entity }
+	      end
+	    end
+		end
   end
 
   # PATCH/PUT /movies/1

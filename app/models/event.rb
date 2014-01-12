@@ -5,5 +5,4 @@ class Event < ActiveRecord::Base
 	scope :asc, order("events.event_date ASC")
 	
 	validates :event_date, presence: true
-	validates :event_name, presence: true, uniqueness: true
 end

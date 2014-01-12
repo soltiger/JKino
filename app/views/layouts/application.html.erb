@@ -23,9 +23,11 @@
 					<%= link_to 'Elokuvat', movies_path %>
 				</li>
 
+				<% if admin_rights %>
 				<li class="<%= 'active' if params[:controller] == 'users' %>">
 					<%= link_to "Luo tunnus", sign_up_path %>
 				</li>
+				<% end %>
 
 				<% if current_user %>
 					<li class="<%= 'active' if params[:controller] == 'sessions' %>">

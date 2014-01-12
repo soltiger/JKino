@@ -45,7 +45,7 @@
 	</div>
 	
 	<div>
-		<% Movie.all.each_with_index do |movie, index| %>
+		<% Movie.all.sort_by{|obj| obj.movie_name}.each_with_index do |movie, index| %>
 			<% if index % 3 == 0 %>
 				<div class="row">
 			<% end %>

@@ -6,13 +6,15 @@ class UsersController < ApplicationController
   end
   
   def create
-	@user = User.new( user_params )
-	if @user.save
-		redirect_to root_url, :notice => "Käyttäjä luotu"
-	else
-		render "new"
+		if admin_rights
+			@user = User.new( user_params )
+				if @user.save
+				redirect_to root_url, :notice => "Käyttäjä luotu"
+			else
+				render "new"
+			end
+	  end
 	end
-  end
   
 	private
 		def user_params
