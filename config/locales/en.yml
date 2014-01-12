@@ -20,4 +20,23 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  activerecord:
+    attributes:
+      event:
+        event_date: "Esityksen ajankohta"
+        event_name: "Esityksen nimi"
+      movie:
+        movie_name: "Elokuvan nimi"
+    errors:
+      models:
+        event:
+          attributes:
+            event_date:
+              blank: "ei voi olla tyhjä"
+            event_name:
+              blank: "ei voi olla tyhjä"
+              taken: "on jo käytössä"
+        movie:
+          attributes:
+            movie_name:
+              blank: "ei voi olla tyhjä"
