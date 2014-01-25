@@ -28,6 +28,7 @@ GEM
     arel (4.0.1)
     atomic (1.1.14)
     bcrypt-ruby (3.1.2)
+    bcrypt-ruby (3.1.2-x64-mingw32)
     bcrypt-ruby (3.1.2-x86-mingw32)
     builder (3.1.4)
     coffee-rails (4.0.1)
@@ -106,6 +107,7 @@ GEM
       activesupport (>= 3.0)
       sprockets (~> 2.8)
     sqlite3 (1.3.8)
+    sqlite3 (1.3.8-x64-mingw32)
     sqlite3 (1.3.8-x86-mingw32)
     term-ansicolor (1.2.2)
       tins (~> 0.8)
@@ -126,6 +128,7 @@ GEM
 
 PLATFORMS
   ruby
+  x64-mingw32
   x86-mingw32
 
 DEPENDENCIES

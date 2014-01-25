@@ -6,10 +6,10 @@ JKino::Application.routes.draw do
 	get "sessions/new"
 	get "users/new"
 	
-	resources :movies
-	resources :events
-	resources :users
-	resources :sessions
+	resources :movies, :only => [:index, :new, :create, :show, :edit, :update, :destroy]
+	resources :events, :only => [:index, :new, :create, :show, :edit, :update, :destroy]
+	resources :users, :only => [:new, :create]
+	resources :sessions, :only => [:new, :create]
 	
 	root 'events#index'
 end
