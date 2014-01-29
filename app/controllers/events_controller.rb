@@ -18,11 +18,16 @@ class EventsController < ApplicationController
   def new
 	if admin_rights
 		@event = Event.new
+	else
+		redirect_to events_url
 	end
   end
 
   # GET /events/1/edit
   def edit
+	if not admin_rights
+		redirect_to events_url
+	end
   end
 
   # POST /events
@@ -47,6 +52,8 @@ class EventsController < ApplicationController
 			format.json { render json: @event.errors, status: :unprocessable_entity }
 		  end
 		end
+	else
+		redirect_to events_url
 	end
   end
 
@@ -73,6 +80,8 @@ class EventsController < ApplicationController
 			format.json { render json: @event.errors, status: :unprocessable_entity }
 		  end
 		end
+	else
+		redirect_to events_url
 	end
   end
 
@@ -85,6 +94,8 @@ class EventsController < ApplicationController
 		  format.html { redirect_to events_url, notice: 'Esitys poistettu' }
 		  format.json { head :no_content }
 		end
+	else
+		redirect_to events_url
 	end
   end
 

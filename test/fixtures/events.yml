@@ -1,9 +1,10 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  event_name: MyString
-  event_date: 2014-01-10
+event_one:
+  event_name: Event1
+  event_date: 2000-01-11
+  participantCount: 
 
-two:
-  event_name: MyString
-  event_date: 2014-01-10
+event_two:
+  event_name: Event2
+  event_date: 2012-02-12

@@ -2,7 +2,11 @@
 
 class UsersController < ApplicationController
 	def new
-		@user = User.new
+		if admin_rights
+			@user = User.new
+		else
+			redirect_to events_url
+		end
 	end
   
 	def create
@@ -14,6 +18,8 @@ class UsersController < ApplicationController
 			else
 				render "new"
 			end
+		else
+			redirect_to events_url
 		end
 	end
   

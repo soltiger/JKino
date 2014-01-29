@@ -16,28 +16,37 @@ class MoviesController < ApplicationController
 
   # GET /movies/new
   def new
-    @movie = Movie.new
+	if admin_rights
+		@movie = Movie.new
+	else
+		redirect_to movies_url
+	end
   end
 
   # GET /movies/1/edit
   def edit
+  	if not admin_rights
+		redirect_to movies_url
+	end
   end
 
   # POST /movies
   # POST /movies.json
   def create
 		if admin_rights
-	    @movie = Movie.new(movie_params)
+			@movie = Movie.new(movie_params)
 
-	    respond_to do |format|
-	      if @movie.save
-	        format.html { redirect_to movies_url, notice: 'Elokuva lisätty' }
-	        format.json { render action: 'show', status: :created, location: @movie }
-	      else
-	        format.html { render action: 'new' }
-	        format.json { render json: @movie.errors, status: :unprocessable_entity }
-	      end
-	    end
+			respond_to do |format|
+			  if @movie.save
+				format.html { redirect_to movies_url, notice: 'Elokuva lisätty' }
+				format.json { render action: 'show', status: :created, location: @movie }
+			  else
+				format.html { render action: 'new' }
+				format.json { render json: @movie.errors, status: :unprocessable_entity }
+			  end
+			end
+		else
+			redirect_to movies_url
 		end
   end
 
@@ -54,6 +63,8 @@ class MoviesController < ApplicationController
 			format.json { render json: @movie.errors, status: :unprocessable_entity }
 		  end
 		end
+	else
+		redirect_to movies_url		
     end
   end
 
@@ -66,6 +77,8 @@ class MoviesController < ApplicationController
 		  format.html { redirect_to movies_url, notice: 'Elokuva poistettu' }
 		  format.json { head :no_content }
 		end
+	else
+		redirect_to movies_url
 	end
   end
 
