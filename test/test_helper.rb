@@ -4,6 +4,8 @@ require 'rails/test_help'
 require 'coveralls'
 Coveralls.wear!('rails')
 
+load "#{Rails.root}/db/seeds.rb"
+
 class ActiveSupport::TestCase
   ActiveRecord::Migration.check_pending!
 

@@ -17,9 +17,14 @@ class EventsControllerTest < ActionController::TestCase
   end
 
   test "should create event" do
+	@session = Session.create!( :username => "admin", :password => "admin" )
+	log_in @session
+	
     assert_difference('Event.count') do
       post :create, event: { event_date: @event.event_date, event_name: @event.event_name }
     end
+	
+	log_out
 
     assert_redirected_to event_path(assigns(:event))
   end
