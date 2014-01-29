@@ -5,7 +5,7 @@ require 'rails/test_help'
 
 load "#{Rails.root}/db/seeds.rb"
 
-Coveralls.wear_merged!('rails')
+Coveralls.wear!('rails')
 
 class ActiveSupport::TestCase
   ActiveRecord::Migration.check_pending!
