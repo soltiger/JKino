@@ -1,0 +1,47 @@
+{
+  "MiniTest": {
+    "coverage": {
+      "C:/Src/ror/JKino/app/models/event.rb": [
+        1,
+        1,
+        null,
+        1,
+        1,
+        null,
+        1,
+        null
+      ],
+      "C:/Src/ror/JKino/app/models/movie.rb": [
+        1,
+        1,
+        null,
+        1,
+        1,
+        null,
+        1,
+        null
+      ],
+      "C:/Src/ror/JKino/app/helpers/application_helper.rb": [
+        1,
+        null
+      ],
+      "C:/Src/ror/JKino/app/helpers/events_helper.rb": [
+        1,
+        null
+      ],
+      "C:/Src/ror/JKino/app/helpers/movies_helper.rb": [
+        1,
+        null
+      ],
+      "C:/Src/ror/JKino/app/helpers/sessions_helper.rb": [
+        1,
+        null
+      ],
+      "C:/Src/ror/JKino/app/helpers/users_helper.rb": [
+        1,
+        null
+      ]
+    },
+    "timestamp": 1391029922
+  }
+}
