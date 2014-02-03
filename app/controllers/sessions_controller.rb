@@ -5,6 +5,7 @@ class SessionsController < ApplicationController
   end
   
   def create
+	#logger.debug "User #{params[:username]} tries to login with password #{params[:password]}"
 	user = User.authenticate( params[:username], params[:password] )
 	
 	if user

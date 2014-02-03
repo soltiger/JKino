@@ -2,7 +2,8 @@ require 'test_helper'
 
 class UsersControllerTest < ActionController::TestCase
   setup do
-    @user = users(:one)
+    @test_admin = users(:test_admin)
+    @test_user = users(:test_user)
   end
   
   test "should not get new" do
@@ -13,7 +14,7 @@ class UsersControllerTest < ActionController::TestCase
   
   test "should not create user" do
     assert_no_difference('User.count') do
-      post :create, user: { username: @user.username, email: @user.email, password_hash: @user.password_hash, password_salt: @user.password_salt, admin: @user.admin }
+      post :create, user: { username: "new_user", email: "new_email@email.com", password_confirmation: "new_password" }
     end
     assert_redirected_to events_path
   end

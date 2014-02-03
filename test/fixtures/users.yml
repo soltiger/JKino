@@ -1,15 +1,15 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  username: MyString
-  email: MyString
-  password_hash: MyString
-  password_salt: MyString
-  admin: false
+test_admin:
+  username: test_admin
+  email: test_admin@digitaalipiirit.fi
+  password_hash: $2a$10$4FbmyfsFctuL6u2rbWLVh.7.YrIR1nUK5QZvgZQWFMaw79nLVKIMm
+  password_salt: $2a$10$4FbmyfsFctuL6u2rbWLVh.
+  admin: true
 
-two:
-  username: MyString
-  email: MyString
-  password_hash: MyString
-  password_salt: MyString
+test_user:
+  username: test_user
+  email: test_user@digitaalipiirit.fi
+  password_hash: $2a$10$T/ooJu0gXIm9e1zCCcRHRe1h04mCdHBjl0mhx1KA9VKRxuXH/bIYq
+  password_salt: $2a$10$T/ooJu0gXIm9e1zCCcRHRe
   admin: false
