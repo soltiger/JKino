@@ -18,6 +18,7 @@ class SessionsController < ApplicationController
   end
   
   def destroy
+	logger.debug "Loggin out, user ID: #{session[:user_id]}"
 	session[:user_id] = nil
 	redirect_to root_url, :notice => "Kirjauduit ulos"
   end

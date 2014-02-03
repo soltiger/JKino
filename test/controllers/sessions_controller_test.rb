@@ -27,10 +27,26 @@ class SessionsControllerTest < ActionController::TestCase
 	assert_redirected_to root_url
   end
 
+   test "should login & logout, normal user" do
+    get :new
+    post :create, { username: @test_user_name, password: @test_user_password }
+	assert_redirected_to root_url
+    delete :destroy
+	assert_redirected_to root_url
+  end
+ 
   test "should login, admin user" do
     get :new
     post :create, { username: @test_admin_name, password: @test_admin_password }
 	assert_redirected_to root_url
   end
 
+  test "should login, admin user" do
+    get :new
+    post :create, { username: @test_admin_name, password: @test_admin_password }
+	assert_redirected_to root_url
+    delete :destroy
+	assert_redirected_to root_url
+  end
+  
 end
