@@ -6,8 +6,8 @@ class SessionsControllerTest < ActionController::TestCase
 	@fake_user_passowrd = "fake_password"
     @test_user_name = "test_user"
     @test_user_password = "test_user_123"
-    @test_admin_name = "test_user"
-    @test_admin_password = "test_user_123"
+    @test_admin_name = "test_admin"
+    @test_admin_password = "test_admin_123"
   end
 
   test "should get new" do
@@ -41,7 +41,7 @@ class SessionsControllerTest < ActionController::TestCase
 	assert_redirected_to root_url
   end
 
-  test "should login, admin user" do
+  test "should login & logout, admin user" do
     get :new
     post :create, { username: @test_admin_name, password: @test_admin_password }
 	assert_redirected_to root_url
