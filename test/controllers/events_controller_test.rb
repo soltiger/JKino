@@ -13,7 +13,6 @@ class EventsControllerTest < ActionController::TestCase
 
   test "should not get new" do
     get :new
-    #assert_response :success
     assert_redirected_to events_path
   end
 
@@ -32,13 +31,11 @@ class EventsControllerTest < ActionController::TestCase
 
   test "should not get edit" do
     get :edit, id: @event
-    #assert_response :success
     assert_redirected_to events_path
   end
 
   test "should not update event" do
     patch :update, id: @event, event: { event_date: @event.event_date, event_name: @event.event_name }
-    #assert_redirected_to event_path(assigns(:event))
     assert_redirected_to events_path
   end
 
@@ -47,7 +44,6 @@ class EventsControllerTest < ActionController::TestCase
       delete :destroy, id: @event
     end
 
-    #assert_redirected_to events_path
     assert_redirected_to events_path
   end
 end

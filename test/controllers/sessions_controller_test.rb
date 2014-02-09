@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'test_helper'
 
 class SessionsControllerTest < ActionController::TestCase
@@ -19,26 +20,32 @@ class SessionsControllerTest < ActionController::TestCase
     get :new
     post :create, { username: @fake_user_name, password: @fake_user_passowrd }
     assert_response :success
+	assert_equal 'Väärä käyttäjänimi tai salasana', flash[:alert]
   end
 
   test "should login, normal user" do
     get :new
     post :create, { username: @test_user_name, password: @test_user_password }
 	assert_redirected_to root_url
+	assert_equal 'Kirjautuminen onnistui', flash[:notice]
   end
 
-   test "should login & logout, normal user" do
+  test "should login & logout, normal user" do
     get :new
     post :create, { username: @test_user_name, password: @test_user_password }
 	assert_redirected_to root_url
-    delete :destroy
+	assert_equal 'Kirjautuminen onnistui', flash[:notice]
+	
+    get :destroy
 	assert_redirected_to root_url
+	assert_equal 'Kirjauduit ulos', flash[:notice]
   end
  
   test "should login, admin user" do
     get :new
     post :create, { username: @test_admin_name, password: @test_admin_password }
 	assert_redirected_to root_url
+	assert_equal 'Kirjautuminen onnistui', flash[:notice]
   end
 
   test "should login & logout, admin user" do
@@ -47,6 +54,7 @@ class SessionsControllerTest < ActionController::TestCase
 	assert_redirected_to root_url
     delete :destroy
 	assert_redirected_to root_url
+	assert_equal 'Kirjauduit ulos', flash[:notice]
   end
   
 end

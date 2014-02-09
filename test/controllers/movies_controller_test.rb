@@ -13,7 +13,6 @@ class MoviesControllerTest < ActionController::TestCase
 
   test "should not get new" do
     get :new
-    #assert_response :success
 	assert_redirected_to movies_path
   end
 
@@ -22,7 +21,6 @@ class MoviesControllerTest < ActionController::TestCase
       post :create, movie: { movie_name: @movie.movie_name, movie_url: @movie.movie_url }
     end
 
-    #assert_redirected_to movie_path(assigns(:movie))
 	assert_redirected_to movies_path
   end
 
@@ -33,13 +31,11 @@ class MoviesControllerTest < ActionController::TestCase
 
   test "should not get edit" do
     get :edit, id: @movie
-    #assert_response :success
 	assert_redirected_to movies_path
   end
 
   test "should not update movie" do
     patch :update, id: @movie, movie: { movie_name: @movie.movie_name, movie_url: @movie.movie_url }
-    #assert_redirected_to movie_path(assigns(:movie))
 	assert_redirected_to movies_path
   end
 
@@ -48,7 +44,6 @@ class MoviesControllerTest < ActionController::TestCase
       delete :destroy, id: @movie
     end
 
-    #assert_redirected_to movies_path
 	assert_redirected_to movies_path
   end
 end
