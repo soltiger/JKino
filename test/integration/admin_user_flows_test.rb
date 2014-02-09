@@ -185,6 +185,56 @@ class AdminUserFlowsTest < ActionDispatch::IntegrationTest
 	end	
 
 	#
+	# CREATE USER
+	#
+	test "should create user" do
+		create_user("new_test_user")
+	end	
+	
+	test "should not create user without username" do
+		get new_user_path
+		assert_response :success
+		
+		assert_no_difference('User.count') do
+			post_via_redirect users_path, user: { username: "", email: "new_email@email.com", password: "secret", password_confirmation: "secret" }
+		end
+
+		assert_equal users_path, path
+	end	
+
+	test "should not create user without password" do
+		get new_user_path
+		assert_response :success
+		
+		assert_no_difference('User.count') do
+			post_via_redirect users_path, user: { username: "new_test_user_2", email: "new_email@email.com", password: "", password_confirmation: "" }
+		end
+
+		assert_equal users_path, path
+	end	
+
+	test "should not create user with not matching passwords" do
+		get new_user_path
+		assert_response :success
+		
+		assert_no_difference('User.count') do
+			post_via_redirect users_path, user: { username: "new_test_user_2", email: "new_email@email.com", password: "secret", password_confirmation: "" }
+		end
+
+		assert_equal users_path, path
+	end	
+
+	test "should not create user with same username" do
+		create_user("new_test_user_2")
+		
+		assert_no_difference('User.count') do
+			post_via_redirect users_path, user: { username: "new_test_user_2", email: "new_email@email.com", password: "secret", password_confirmation: "secret" }
+		end
+
+		assert_equal users_path, path
+	end	
+	
+	#
 	# PRIVATE
 	#
 	private 
@@ -195,8 +245,8 @@ class AdminUserFlowsTest < ActionDispatch::IntegrationTest
 		get "/log_in"
 		assert_response :success
 		
-		post_via_redirect "/sessions", username: @test_admin_name, password: @test_admin_password
-		assert_equal '/', path
+		post_via_redirect sessions_path, username: @test_admin_name, password: @test_admin_password
+		assert_equal root_path, path
 		assert_equal 'Kirjautuminen onnistui', flash[:notice]
 	end
 	
@@ -240,5 +290,33 @@ class AdminUserFlowsTest < ActionDispatch::IntegrationTest
 		assert_equal movies_path, path
 		assert_equal 'Elokuva lisätty', flash[:notice]
 	end
-	
+
+	def create_user(username)
+		get new_user_path
+		assert_response :success
+		
+		assert_difference('User.count', 1) do
+			post_via_redirect users_path, user: { username: username, email: "new_email@email.com", password: "secret", password_confirmation: "secret" }
+		end
+
+		@latest_user = User.order("created_at").last
+		
+		assert_equal username, @latest_user.username
+		assert_equal "new_email@email.com", @latest_user.email
+
+		assert_equal root_path, path
+		assert_equal 'Käyttäjä luotu', flash[:notice]
+		
+		logout
+
+		get "/log_in"
+		assert_response :success
+		
+		post_via_redirect sessions_path, username: username, password: "secret"
+		assert_equal root_path, path
+		assert_equal 'Kirjautuminen onnistui', flash[:notice]
+
+		logout
+		login_admin
+	end
 end

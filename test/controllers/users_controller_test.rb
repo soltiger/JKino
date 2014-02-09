@@ -14,7 +14,7 @@ class UsersControllerTest < ActionController::TestCase
   
   test "should not create user" do
     assert_no_difference('User.count') do
-      post :create, user: { username: "new_user", email: "new_email@email.com", password_confirmation: "new_password" }
+      post :create, user: { username: "new_user", email: "new_email@email.com", password: "new_password", password_confirmation: "new_password" }
     end
     assert_redirected_to events_path
   end
