@@ -52,6 +52,7 @@ class SessionsControllerTest < ActionController::TestCase
     get :new
     post :create, { username: @test_admin_name, password: @test_admin_password }
 	assert_redirected_to root_url
+	
     delete :destroy
 	assert_redirected_to root_url
 	assert_equal 'Kirjauduit ulos', flash[:notice]

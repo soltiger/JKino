@@ -45,6 +45,7 @@ class EventsController < ApplicationController
 		
 		respond_to do |format|
 		  if @event.save
+			logger.debug "Created event with ID: #{@event.id.to_s}"
 			format.html { redirect_to events_url, notice: 'Esitys luotu' }
 			format.json { render action: 'show', status: :created, location: @event }
 		  else
